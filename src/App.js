@@ -74,7 +74,7 @@ export default function App() {
           </li>
         </ul>
       </div>
-
+      
       <div className="news">
         <form>
         <div className="search" >
@@ -86,7 +86,7 @@ export default function App() {
               setSearchBar(event.target.value);
             }}
           />
-  
+
         </div>
         </form>
         
