@@ -12,8 +12,8 @@ export default function App() {
   const [searchBar, setSearchBar] = useState("");
   const [text, setText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const [numItems, setNumItems] = useState(10);
+  const itemsPerPage = 5;
+  const [numItems, setNumItems] = useState(5);
 
   
 
@@ -109,7 +109,7 @@ export default function App() {
             </div>  )}
         </article>
       </div>
-      <button onClick={() => setNumItems(numItems + 10)}>Load More</button>
+      <button onClick={() => setNumItems(numItems + 5)}>Load More</button>
       <span className="horizontalLine"></span>
 
       <div className="bottom">
