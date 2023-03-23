@@ -78,6 +78,7 @@ export default function App() {
       <div className="news">
         <form>
         <div className="search" >
+        <p id="Search-text">Search:</p>
           <input
             type="text"
             placeholder="Enter Topic"
