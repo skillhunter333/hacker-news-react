@@ -11,6 +11,11 @@ export default function App() {
   const [data, setData] = useState(mock.hits);
   const [searchBar, setSearchBar] = useState("");
   const [text, setText] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const [numItems, setNumItems] = useState(10);
+
+  
 
   //useEffect to get the data from API. [] means at the end is trigger this once and that is all.
   useEffect(() => {
@@ -39,7 +44,8 @@ export default function App() {
       .catch((err) => console.log(err));
   };
 
- 
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
   return (
     <div className="app">
@@ -91,7 +97,7 @@ export default function App() {
         </form>
         
         <article className="cards">
-          {!data ? <div className="spinner"></div> : data.map((ele) => <div className="section">
+          {!data ? <div className="spinner"></div> : data.slice(0, numItems).map((ele) => <div className="section">
             <h2>{ele.title}</h2> 
             <ul>
             <li>Author:&nbsp;{ele.author}</li>
@@ -103,7 +109,7 @@ export default function App() {
             </div>  )}
         </article>
       </div>
-
+      <button onClick={() => setNumItems(numItems + 10)}>Load More</button>
       <span className="horizontalLine"></span>
 
       <div className="bottom">
