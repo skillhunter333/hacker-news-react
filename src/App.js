@@ -33,7 +33,7 @@ export default function App() {
 
   //Where it says foo in the example of the link, we added ${searchBar} to make that data dynamic for any keywords that is entered in the searchbar.
   const getSearchData = () => {
-    fetch(`https://hn.algolia.com/api/v1/search?query=${searchBar}&tags=story`)
+    fetch(`http://hn.algolia.com/api/v1/search_by_date?query=${searchBar}&tags=story`)
       .then((respond) => respond.json())
       .then((data) => setData(data.hits))
       .catch((err) => console.log(err));
@@ -81,12 +81,11 @@ export default function App() {
           <input
             type="text"
             placeholder="Enter Topic"
-            
-          />
-          <button onChange={(event) => {
+            onChange={(event) => {
               setSearchBar(event.target.value);
-            }}>Search</button>
-          
+            }}
+          />
+  
         </div>
         </form>
         
@@ -94,8 +93,8 @@ export default function App() {
           {!data ? <div className="spinner"></div> : data.map((ele) => <div className="section">
             <h2>{ele.title}</h2> 
             <ul>
-            <li>by {ele.author}</li>
-            <li><p>posted: {format(new Date(ele.created_at), 'MMMM dd yyyy')}</p></li>
+            <li>Author:&nbsp;{ele.author}</li>
+            <li><p>posted:&nbsp;{format(new Date(ele.created_at), 'MMMM dd yyyy')}</p></li>
             <li><a href={ele.url} target="_blank" rel="noreffer">Read Artical</a></li>
           </ul>
           
