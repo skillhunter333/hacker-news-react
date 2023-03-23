@@ -39,27 +39,7 @@ export default function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if(!text) {
-      toast.error(':index_pointing_at_the_viewer:  Search bar is Empty!', {
-        
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        });
-    }
-    else {
-      setData(text)
-
-    }
-  }
+ 
 
   return (
     <div className="app">
@@ -96,27 +76,26 @@ export default function App() {
       </div>
 
       <div className="news">
-        <form  onSubmit={handleSubmit}>
+        <form>
         <div className="search" >
-          <p id="Search-text">Search:</p>
           <input
             type="text"
             placeholder="Enter Topic"
-            onChange={(event) => {
-              setSearchBar(event.target.value);
-            }}
+            
           />
-          
+          <button onChange={(event) => {
+              setSearchBar(event.target.value);
+            }}>Search</button>
           
         </div>
         </form>
         
         <article className="cards">
-          {!data ? "Loading..." : data.map((ele) => <div className="section">
+          {!data ? <div className="spinner"></div> : data.map((ele) => <div className="section">
             <h2>{ele.title}</h2> 
             <ul>
             <li>by {ele.author}</li>
-            <li><p>{format(new Date(ele.created_at), 'MMMM dd yyyy')}</p></li>
+            <li><p>posted: {format(new Date(ele.created_at), 'MMMM dd yyyy')}</p></li>
             <li><a href={ele.url} target="_blank" rel="noreffer">Read Artical</a></li>
           </ul>
           

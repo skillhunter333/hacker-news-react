@@ -120,6 +120,8 @@ a:visited {
   display: flex;
   border: 2px solid black;
   justify-content: space-between;
+  align-items: center;
+  padding-right: 40px;
 }
 
 .section .title h1 {
@@ -135,8 +137,6 @@ a:visited {
   display: flex;
   font-weight: bold;
   color: rgb(52, 20, 235);
-  text-align: center;
- 
 }
 
 img {
@@ -145,5 +145,38 @@ img {
   padding-right: 10px;
 }
 
+.cards li p{
+  color: #f36605;
+}
+
+input{
+  font-family: inherit;
+  font-size: 20px;
+  outline: none;
+  background-color: transparent;
+  padding: 1.25rem 1rem;
+  color: rgb(252, 252, 252);
+  border: 0.1rem solid rgb(253, 253, 253);
+  margin-right: 10px;
+  border-radius: 10px;
+  width: 20%;
+}
+
+button{
+  font-family: inherit;
+  background-color: #f36605;
+  padding: 1.25rem 1rem;
+  border: 0.1rem solid rgb(247, 248, 248);
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+button:hover{
+  background-color: transparent;
+  cursor: pointer;
+  color: blue;
+  transition: all 0.15s ease-in-out;
+
+}
 
 
