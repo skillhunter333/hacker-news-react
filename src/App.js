@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import mock from "./mock";
+import {format} from "date-fns";
+import { ToastContainer, Toast, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   console.log("mock", mock.hits);
@@ -7,6 +10,7 @@ export default function App() {
   //useState
   const [data, setData] = useState(mock.hits);
   const [searchBar, setSearchBar] = useState("");
+  const [text, setText] = useState("");
 
   //useEffect to get the data from API. [] means at the end is trigger this once and that is all.
   useEffect(() => {
@@ -35,14 +39,34 @@ export default function App() {
       .catch((err) => console.log(err));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if(!text) {
+      toast.error(':index_pointing_at_the_viewer:  Search bar is Empty!', {
+        
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+    }
+    else {
+      setData(text)
+
+    }
+  }
+
   return (
     <div className="app">
       <div>
         <ul className="nav-bar">
           <li>
-            <a href="./hackerNews" id="navbarfirst">
-              Hacker News
-            </a>
+          <img className='img' src='https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png'></img>Hacker Clone
           </li>
           <li>
             <a href="./new">new</a>
@@ -72,7 +96,8 @@ export default function App() {
       </div>
 
       <div className="news">
-        <div className="search">
+        <form  onSubmit={handleSubmit}>
+        <div className="search" >
           <p id="Search-text">Search:</p>
           <input
             type="text"
@@ -81,10 +106,23 @@ export default function App() {
               setSearchBar(event.target.value);
             }}
           />
+          
+          
         </div>
-        <div>
-          {!data ? "Loading..." : data.map((ele) => <p>{ele.title} </p>)}
-        </div>
+        </form>
+        
+        <article className="cards">
+          {!data ? "Loading..." : data.map((ele) => <div className="section">
+            <h2>{ele.title}</h2> 
+            <ul>
+            <li>by {ele.author}</li>
+            <li><p>{format(new Date(ele.created_at), 'MMMM dd yyyy')}</p></li>
+            <li><a href={ele.url} target="_blank" rel="noreffer">Read Artical</a></li>
+          </ul>
+          
+            
+            </div>  )}
+        </article>
       </div>
 
       <span className="horizontalLine"></span>
