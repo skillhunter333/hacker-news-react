@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import mock from "./mock";
 import {format} from "date-fns";
-import { ToastContainer, Toast, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
   console.log("mock", mock.hits);
@@ -10,9 +8,6 @@ export default function App() {
   //useState
   const [data, setData] = useState(mock.hits);
   const [searchBar, setSearchBar] = useState("");
-  const [text, setText] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
   const [numItems, setNumItems] = useState(5);
 
   
@@ -44,8 +39,7 @@ export default function App() {
       .catch((err) => console.log(err));
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  
 
   return (
     <div className="app">
