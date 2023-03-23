@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import mock from "./mock";
+import {format} from "date-fns";
 
 export default function App() {
   console.log("mock", mock.hits);
@@ -7,6 +8,9 @@ export default function App() {
   //useState
   const [data, setData] = useState(mock.hits);
   const [searchBar, setSearchBar] = useState("");
+  const [numItems, setNumItems] = useState(5);
+
+  
 
   //useEffect to get the data from API. [] means at the end is trigger this once and that is all.
   useEffect(() => {
@@ -29,20 +33,20 @@ export default function App() {
 
   //Where it says foo in the example of the link, we added ${searchBar} to make that data dynamic for any keywords that is entered in the searchbar.
   const getSearchData = () => {
-    fetch(`https://hn.algolia.com/api/v1/search?query=${searchBar}&tags=story`)
+    fetch(`http://hn.algolia.com/api/v1/search?query=${searchBar}&tags=story`)
       .then((respond) => respond.json())
       .then((data) => setData(data.hits))
       .catch((err) => console.log(err));
   };
+
+  
 
   return (
     <div className="app">
       <div>
         <ul className="nav-bar">
           <li>
-            <a href="./hackerNews" id="navbarfirst">
-              Hacker News
-            </a>
+          <img className='img' src='https://hn.algolia.com/packs/media/images/logo-hn-search-a822432b.png'></img>Hacker Clone
           </li>
           <li>
             <a href="./new">new</a>
@@ -70,10 +74,11 @@ export default function App() {
           </li>
         </ul>
       </div>
-
+      
       <div className="news">
-        <div className="search">
-          <p id="Search-text">Search:</p>
+        <form>
+        <div className="search" >
+        <p id="Search-text">Search:</p>
           <input
             type="text"
             placeholder="Enter Topic"
@@ -81,12 +86,24 @@ export default function App() {
               setSearchBar(event.target.value);
             }}
           />
-        </div>
-        <div>
-          {!data ? "Loading..." : data.map((ele) => <p>{ele.title} </p>)}
-        </div>
-      </div>
 
+        </div>
+        </form>
+        
+        <article className="cards">
+          {!data ? <div className="spinner"></div> : data.slice(0, numItems).map((ele) => <div className="section">
+            <h2>{ele.title}</h2> 
+            <ul>
+            <li>Author:&nbsp;{ele.author}</li>
+            <li><p>posted:&nbsp;{format(new Date(ele.created_at), 'MMMM dd yyyy')}</p></li>
+            <li><a href={ele.url} target="_blank" rel="noreffer">Read Artical</a></li>
+          </ul>
+          
+            
+            </div>  )}
+        </article>
+      </div>
+      <button onClick={() => setNumItems(numItems + 5)}>Load More</button>
       <span className="horizontalLine"></span>
 
       <div className="bottom">
