@@ -33,7 +33,7 @@ export default function App() {
 
   //Where it says foo in the example of the link, we added ${searchBar} to make that data dynamic for any keywords that is entered in the searchbar.
   const getSearchData = () => {
-    fetch(`http://hn.algolia.com/api/v1/search_by_date?query=${searchBar}&tags=story`)
+    fetch(`http://hn.algolia.com/api/v1/search?query=${searchBar}&tags=story`)
       .then((respond) => respond.json())
       .then((data) => setData(data.hits))
       .catch((err) => console.log(err));
