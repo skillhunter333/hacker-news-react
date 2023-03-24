@@ -121,11 +121,11 @@ a:visited {
   border: 2px solid black;
   justify-content: space-between;
   align-items: center;
-  padding-right: 40px;
+  padding-left: 300px;
+  width: 120%;
 }
 
 .section .title h1 {
-  display: flex;
   font-weight: bold;
   font-size: 25px;
   color: white;
@@ -133,11 +133,28 @@ a:visited {
   margin-bottom: 10px;
 }
 
-.section  a {
+.section .title a {
+  margin-bottom: 10px;
   display: flex;
-  font-weight: bold;
-  color: rgb(52, 20, 235);
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  color: blue;
 }
+
+.section .title a:hover {
+  color: white;
+  border-bottom: 10px;
+}
+
+.section .cards div {
+  background: radial-gradient(#f9fcfa,#f17624);
+  padding: 10px;
+  border-radius: 10px;
+  
+}
+
 
 img {
   width: 50px;
@@ -146,7 +163,8 @@ img {
 }
 
 .cards li p{
-  color: #f36605;
+  color: #0a0a0a;
+  font-weight: bold;
 }
 
 input{

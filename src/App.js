@@ -75,6 +75,7 @@ export default function App() {
         </ul>
       </div>
       
+      <section className="section">
       <div className="news">
         <form>
         <div className="search" >
@@ -103,6 +104,7 @@ export default function App() {
             </div>  )}
         </article>
       </div>
+      </section>
       <button onClick={() => setNumItems(numItems + 5)}>Load More</button>
       <span className="horizontalLine"></span>
 
